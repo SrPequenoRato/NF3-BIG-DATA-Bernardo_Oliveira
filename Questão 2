@@ -50,6 +50,25 @@ estatisticas_descritivas_bacharelado = df.loc[(df['grau'] == 'Bacharelado') & (d
 df.groupby('grau')['nota_integral_cotas'].mean().plot.bar(xlabel='Grau dos Cursos', ylabel='Notas Integral de Cotas')
 
 # Exibindo os resultados
+
+print("a) Limpeza das colunas de notas, substituindo NaN por 0.0: ")
+df['nota_integral_ampla'].fillna(0.0, inplace=True)
+print("Coluna 'nota_integral_ampla' após a limpeza:")
+print(df['nota_integral_ampla'])
+print("\n")
+df['nota_integral_cotas'].fillna(0.0, inplace=True)
+print("Coluna 'nota_integral_cotas' após a limpeza:")
+print(df['nota_integral_cotas'])
+print("\n")
+df['nota_parcial_ampla'].fillna(0.0, inplace=True)
+print("Coluna 'nota_parcial_ampla' após a limpeza:")
+print(df['nota_parcial_ampla'])
+print("\n")
+df['nota_parcial_cotas'].fillna(0.0, inplace=True)
+print("Coluna 'nota_parcial_cotas' após a limpeza:")
+print(df['nota_parcial_cotas'])
+print("\n")
+
 print("B) Agrupamento por grau:")
 print(agrupado_grau)
 print("\nC) Média de notas de corte por Estado:")
