@@ -1,0 +1,66 @@
+# Aluno: Bernardo Chermont Praxedes de Oliveira
+# Matricula: 202002435682
+
+# Exercicio_NF3 ARA0051
+
+# Questão 1 ->
+
+import pandas as pd
+
+# Carregar o arquivo CSV
+df = pd.read_csv('https://raw.githubusercontent.com/SrPequenoRato/NF3-BIG-DATA-Bernardo_Oliveira/main/world_alcohol.csv?token=GHSAT0AAAAAACD5CTFP7HFVKQY2DRTUI542ZEJWJZQ')
+
+# A) Agrupar por Tipo de bebidas (Beverage Types)
+agrupado_tipo_bebida = df.groupby('Beverage Types')
+
+for tipo, grupo in agrupado_tipo_bebida:
+    print("Tipo de bebida:", tipo)
+    print(grupo)
+    print("\n")
+
+# B) Agrupar por Região e Ano (WHO region e Year)
+agrupado_regiao_ano = df.groupby(['WHO region', 'Year'])
+
+for (regiao, ano), grupo in agrupado_regiao_ano:
+    print("Região:", regiao)
+    print("Ano:", ano)
+    print(grupo)
+    print("\n")
+
+
+# C) Contar a ocorrência de Regiões, Países e Soma da coluna de valores por Bebida
+contagem_regioes = df['WHO region'].value_counts()
+contagem_paises = df['Country'].value_counts()
+soma_bebida = df.groupby('Beverage Types')['Display Value'].sum()
+
+# Exibir os resultados
+print("Contagem de Regiões:")
+print(contagem_regioes)
+print("\nContagem de Países:")
+print(contagem_paises)
+print("\nSoma da coluna de valores por Bebida:")
+print(soma_bebida)
+
+# D) Análises estatísticas da coluna dos valores: Média, Moda, Mediana, Estatística Descritiva
+media_valores = df['Display Value'].mean()
+moda_valores = df['Display Value'].mode().values
+mediana_valores = df['Display Value'].median()
+descritiva_valores = df['Display Value'].describe()
+
+# Exibir resultados
+print("\nD) Análises estatísticas da coluna dos valores:")
+print("Média:", media_valores)
+print("Moda:", moda_valores)
+print("Mediana:", mediana_valores)
+print("Estatística Descritiva:")
+print(descritiva_valores)
+
+# E.1) Mostrar a coluna de bebidas do ano de 1985
+coluna_bebidas_1985 = df.loc[df['Year'] == 1985, 'Beverage Types']
+print("\nE.1) Coluna de bebidas do ano de 1985:")
+print(coluna_bebidas_1985)
+
+# E.2) Mostrar a coluna de Região com valores acima de 4
+coluna_regiao_acima_4 = df.loc[df['Display Value'] > 4, 'WHO region']
+print("\nE.2) Coluna de Região com valores acima de 4:")
+print(coluna_regiao_acima_4)
