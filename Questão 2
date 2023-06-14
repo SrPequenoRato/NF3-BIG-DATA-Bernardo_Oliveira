@@ -19,11 +19,6 @@ df['nota_parcial_cotas'].fillna(0.0, inplace=True)
 # b) Agrupar os dados pelo grau
 agrupado_grau = df.groupby('grau')
 
-for grau, grupo in agrupado_grau:
-  print("Grau dos cursos:", grau)
-  print(grupo)
-  print("\n")
-
 # c) Agrupar os dados pelos cursos de Matemática, Medicina e Pedagogia
 cursos_interesse = ['Matemática', 'Medicina', 'Pedagogia']
 agrupado_cursos_interesse = df[df['curso_busca'].isin(cursos_interesse)].groupby('curso_busca')
@@ -70,14 +65,23 @@ print(df['nota_parcial_cotas'])
 print("\n")
 
 print("B) Agrupamento por grau:")
-print(agrupado_grau)
+
+for grau, grupo in agrupado_grau:
+  print("Grau dos cursos:", grau)
+  print(grupo)
+  print("\n")
+
 print("\nC) Média de notas de corte por Estado:")
 print(media_notas_corte_estado)
+print("\n")
 print("\nD) Agrupamento de cursos Tecnológicos:")
 print(agrupado_tecnologicos)
+print("\n")
 print("\nE) Média das mensalidades dos cursos de Medicina:")
 print(media_mensalidades_medicina)
+print("\n")
 print("\nF) Média das notas de corte dos cursos de tempo integral:")
 print(media_notas_corte_integral)
+print("\n")
 print("\nG) Estatísticas Descritivas das Notas Integral Ampla dos cursos de Bacharelado:")
 print(estatisticas_descritivas_bacharelado)
