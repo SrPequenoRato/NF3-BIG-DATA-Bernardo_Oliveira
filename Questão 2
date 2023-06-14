@@ -8,7 +8,7 @@
 import pandas as pd
 
 # Carregar o arquivo CSV
-df = pd.read_csv('cursos-prouni.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/SrPequenoRato/NF3-BIG-DATA-Bernardo_Oliveira/main/cursos-prouni.csv?token=GHSAT0AAAAAACD5CTFOWBZCBU4V5P6Q3FUKZEJWJAA')
 
 # a) Limpeza das colunas de notas, substituindo NaN por 0.0
 df['nota_integral_ampla'].fillna(0.0, inplace=True)
