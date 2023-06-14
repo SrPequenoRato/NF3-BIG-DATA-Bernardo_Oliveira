@@ -1,0 +1,64 @@
+# Aluno: Bernardo Chermont Praxedes de Oliveira
+# Matricula: 202002435682
+
+# Exercicio_NF3 ARA0051
+
+# Questão 2 ->
+
+import pandas as pd
+
+# Carregar o arquivo CSV
+df = pd.read_csv('cursos-prouni.csv')
+
+# a) Limpeza das colunas de notas, substituindo NaN por 0.0
+df['nota_integral_ampla'].fillna(0.0, inplace=True)
+df['nota_integral_cotas'].fillna(0.0, inplace=True)
+df['nota_parcial_ampla'].fillna(0.0, inplace=True)
+df['nota_parcial_cotas'].fillna(0.0, inplace=True)
+
+# b) Agrupar os dados pelo grau
+agrupado_grau = df.groupby('grau')
+
+for grau, grupo in agrupado_grau:
+  print("Grau dos cursos:", grau)
+  print(grupo)
+  print("\n")
+
+# c) Agrupar os dados pelos cursos de Matemática, Medicina e Pedagogia
+cursos_interesse = ['Matemática', 'Medicina', 'Pedagogia']
+agrupado_cursos_interesse = df[df['curso_busca'].isin(cursos_interesse)].groupby('curso_busca')
+
+# d) Agrupar os dados por Estado e obter a média de notas de corte por Estado
+media_notas_corte_estado = df.groupby('uf_busca')['nota_integral_cotas'].mean()
+
+# e) Agrupar os dados pelos cursos Tecnológicos
+agrupado_tecnologicos = df[df['grau'] == 'Tecnológico']
+
+# f) Eliminar a coluna "cidade_filtro" do dataframe
+df.drop(columns=['cidade_filtro'], inplace=True)
+
+# g) Apresentar a média das mensalidades dos cursos de Medicina
+media_mensalidades_medicina = df.loc[df['curso_busca'] == 'Medicina', 'mensalidade'].mean()
+
+# h) Média das notas de corte dos cursos de tempo integral
+media_notas_corte_integral = df.loc[df['turno'] == 'Integral', 'nota_integral_cotas'].mean()
+
+# i) Estatística Descritiva das Notas Integral Ampla dos cursos de Bacharelado
+estatisticas_descritivas_bacharelado = df.loc[(df['grau'] == 'Bacharelado') & (df['turno'] == 'Integral'), 'nota_integral_ampla'].describe()
+
+# j) Gráfico comparativo entre o grau dos cursos pelas Notas Integral de Cotas
+df.groupby('grau')['nota_integral_cotas'].mean().plot.bar(xlabel='Grau dos Cursos', ylabel='Notas Integral de Cotas')
+
+# Exibindo os resultados
+print("B) Agrupamento por grau:")
+print(agrupado_grau)
+print("\nC) Média de notas de corte por Estado:")
+print(media_notas_corte_estado)
+print("\nD) Agrupamento de cursos Tecnológicos:")
+print(agrupado_tecnologicos)
+print("\nE) Média das mensalidades dos cursos de Medicina:")
+print(media_mensalidades_medicina)
+print("\nF) Média das notas de corte dos cursos de tempo integral:")
+print(media_notas_corte_integral)
+print("\nG) Estatísticas Descritivas das Notas Integral Ampla dos cursos de Bacharelado:")
+print(estatisticas_descritivas_bacharelado)
